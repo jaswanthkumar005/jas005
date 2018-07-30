@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<title></title>
+<head>
+    <script>
+	
+let reverse="";	     
+var jaswanth=function rev(str1){
+    
+    for (let char of str1){
+        
+       reverse=char+reverse;
+       
+    }
+   console.log(reverse);
+}
+
+
+jaswanth("jdfdsaswth");
+        
+        
+class Node {
+  constructor(data, next = null) {
+    this.data = data;
+    this.next = next;
+  }
+}
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+ 
+  
+  getLast(){
+    if(!this.head){
+       return null;
+    }
+    let node=this.head;
+    while(node){
+      if(!node.next){
+         return node;
+      }
+      node=node.next;
+    }
+  }
+  insertLast(data){
+      let lastNode= this.getLast();
+      if(lastNode){
+        lastNode.next=new Node(data);
+      }else{
+       this.head=new Node(data);
+      }
+    
+  }
+ 
+  fecthNode(){
+      
+      let node=this.head;
+      let arr1=[];
+      while(node){
+          arr1.push(node);
+          node=node.next;
+            
+            }
+      return arr1;
+  }
+  clear(){
+      this.head=null;
+  }
+  partition(x){
+      let node=this.fecthNode();
+      let i=0;
+      let arrless3=[];
+      let arreq3=[];
+      let arrgrt3=[];
+      let finalArr=[];
+      while(i<node.length){
+         // console.log(node[i].data+"ok");
+          let tempData=node[i].data;
+          if(tempData<x){
+               arrless3.push(tempData);
+             }else if(tempData==x){
+                      arreq3.push(tempData);
+                      }else if(tempData>x){
+                               arrgrt3.push(tempData);
+                               }
+          i++;
+      }
+      arrless3.sort(function(a,b){return a-b;});
+      arrgrt3.sort(function(a,b){return a-b;});
+      finalArr.push(...arrless3);
+      finalArr.push(...arreq3);
+      finalArr.push(...arrgrt3);
+      this.clear();
+      for(let val of finalArr){
+           this.insertLast(val);
+      }
+      return finalArr;
+  }
+
+}
+
+let l = new LinkedList();
+//input nodes//
+l.insertLast(1); 
+l.insertLast(4);
+l.insertLast(2);
+l.insertLast(3); 
+l.insertLast(5);
+console.log(l.head);
+console.log(l.getLast());
+//partition node as required value of x , i have gave x=3
+console.log(l.partition(3));
+console.log(l);
+
+
+
+
+    </script>
+    
+</head>
+<body>
+<div style="position:absolute; width:600px;height:500px;border:solid 1px green;top:10px;left:30px;">
+   <div style="position:absolute;width:50px;height:50px;border:solid 1px red;top:20px;left:10px;"></div>
+   <div style="position:absolute;width:50px;height:50px;border:solid 1px red;top:20px;left:10px;"></div>
+</div>
+
+</body>
+</html>
