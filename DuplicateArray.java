@@ -10,10 +10,10 @@ public class  DuplicateArray{
         System.out.println(obj);
         HashSet<String> hash = new HashSet<String>();
           for(String sh : obj){
-              if(!hash.contains(sh)){
-                 hash.add(sh); 
+              if(hash.contains(sh)){
+                 hash.remove(sh); 
               }else{
-                  
+                 hash.add(sh);
               }
           }
           System.out.println(hash);
