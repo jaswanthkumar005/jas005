@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<title></title>
+<head>
+    <script>
+     
+     
+
+        
+       var menu={
+           "content main":"content",
+           "subber":{"content1":"sub1","content2":"sub2","content3":"sub3"},
+           "content main":"content",
+           "subber":{"content1":"sub1","content2":"sub2","content3":"sub3"}
+       };
+       
+       
+       var menuObj=Object.keys(menu);
+         var str="";
+        str+="<ul>";
+        for(var jan in menuObj){
+            var temp=menu[menuObj[jan]];
+            console.log(menuObj[jan]+"menu");
+          
+             str+="<li id='"+menuObj[jan]+"' class='red' onclick='myFunction(this)'>"+menuObj[jan]+"</li>"; 
+            
+            if( typeof temp==="object"){
+                console.log(temp+"temp");
+                str+="<ul>";
+                for(var i of Object.keys(temp)){
+                    console.log(i +"i");
+                    str+="<li id='"+menu[menuObj[jan]][i]+"' class='red' onclick='myFunction(this)'>"+i+"</li>"; 
+                  //console.log(menu.menuObj[jan].i);  
+                }
+                str+="</ul>";
+               } else{
+                  
+               }
+             
+            
+        }
+        str+="</ul>";
+        console.log(str);
+        function func(){ 
+          document.getElementById('appenderId').innerHTML = str;
+
+        }
+        function myFunction(elem){
+          alert(elem.id);
+        }
+
+    
+       
+    </script>
+    <style>
+        ul{ list-style-type: none;}
+    </style>
+    
+</head>
+<body onload="func()">
+<div  id="appenderId" style="position:absolute; width:150px;height:500px;border:solid 1px green;top:10px;left:30px;">
+ddsfsdg
+</div>
+   <div style="position:absolute;width:50px;height:50px;border:solid 1px red;top:20px;left:10px;"></div>
+   <div style="position:absolute;width:50px;height:50px;border:solid 1px red;top:20px;left:10px;"></div>
+</div>
+
+</body>
+</html>
