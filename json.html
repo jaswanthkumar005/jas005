@@ -5,13 +5,22 @@
     <script>
      
      
-
         
        var menu={
            "content main":"content",
            "subber":{"content1":"sub1","content2":"sub2","content3":"sub3"},
-           "content main":"content",
-           "subber":{"content1":"sub1","content2":"sub2","content3":"sub3"}
+		   "subber1":{"content1":"sub1","content2":"sub2","content3":"sub3"}
+          
+       };
+	   
+	   var menu2={
+           "content":"content of our main intro",
+           "subber":"jaswanth",
+		   "sub1":"sub1 content",
+		   "sub2":"sub2 content",
+		   "sub3":"sub3 content",
+           "content main1":"content1",
+           "subber1":"jaswanth2"
        };
        
        
@@ -20,35 +29,37 @@
         str+="<ul>";
         for(var jan in menuObj){
             var temp=menu[menuObj[jan]];
-            console.log(menuObj[jan]+"menu");
-          
-             str+="<li id='"+menuObj[jan]+"' class='red' onclick='myFunction(this)'>"+menuObj[jan]+"</li>"; 
+            console.log(menuObj[jan]+"menu"+temp);
+             
+            
             
             if( typeof temp==="object"){
                 console.log(temp+"temp");
+				 str+="<li id='"+menuObj[jan]+"' class='red' onclick='myFunction(this)'>"+menuObj[jan]+"</li>"; 
                 str+="<ul>";
                 for(var i of Object.keys(temp)){
                     console.log(i +"i");
                     str+="<li id='"+menu[menuObj[jan]][i]+"' class='red' onclick='myFunction(this)'>"+i+"</li>"; 
-                  //console.log(menu.menuObj[jan].i);  
+                 
                 }
                 str+="</ul>";
                } else{
-                  
+                    str+="<li id='"+menu[menuObj[jan]]+"' class='red' onclick='myFunction(this)'>"+menuObj[jan]+"</li>"; 
                }
              
             
         }
         str+="</ul>";
-        console.log(str);
+      //  console.log(str);
         function func(){ 
           document.getElementById('appenderId').innerHTML = str;
-
         }
         function myFunction(elem){
-          alert(elem.id);
+         
+		  var idVal = elem.id;
+		 
+		  document.getElementById("content_area").innerHTML=menu2[idVal];
         }
-
     
        
     </script>
@@ -58,12 +69,12 @@
     
 </head>
 <body onload="func()">
-<div  id="appenderId" style="position:absolute; width:150px;height:500px;border:solid 1px green;top:10px;left:30px;">
+<div  id="appenderId" style="border:solid 1px green;top:0px;left:0px;float:left;">
 ddsfsdg
 </div>
-   <div style="position:absolute;width:50px;height:50px;border:solid 1px red;top:20px;left:10px;"></div>
-   <div style="position:absolute;width:50px;height:50px;border:solid 1px red;top:20px;left:10px;"></div>
-</div>
+   <div id="content_area" style="width:150px;height:500px;border:solid 1px red;border:solid 1px red;float:left"></div>
+   
+
 
 </body>
 </html>
