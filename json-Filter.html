@@ -98,15 +98,7 @@
     "warranty": "365"
 }];
        
-       var menu2={
-           "content":"content of our main intro",
-           "subber":"jaswanth",
-           "sub1":"sub1 content",
-           "sub2":"sub2 content",
-           "sub3":"sub3 content",
-           "content main1":"content1",
-           "subber1":"jaswanth2"
-       };
+
        
 
 Array.prototype.unique=function(){
@@ -118,28 +110,116 @@ Array.prototype.unique=function(){
   }
   return arr;
 }
-       var filtered = menu.filter(function(item){
-         return item.category=="Hardware";
-       });
-       var str ="<table><>";
+var str="";
+ var arrCategory=[];
+ var arrWarranty=[];
+ var arrDescription=[];
+ var arrPrice=[];
+ var arrAvailableQuantity=[];
+ var boolVal=false;
+ var temp=menu;
+function tableManipulation(){
+
+       var localVar;
+      
+	  //temp=menu;
+	  
+	  console.log(JSON.stringify(temp));
+	 // console.log(localVar);
+		/*  if(boolVal==false){
+		  
+		  localVar=menu;
+		   boolVal=true;
+		   str="";
+		  }else{
+		
+			localVar=temp;
+			alert(localVar);
+		  boolVal=false;
+		  
+		  }*/
+        str+="<table><tr><th>Title</th><th>description</th><th>category</th><th>price</th><th>availableQuantity</th><th>daysToShip</th><th>warranty</th></tr>";
        
-var arr1=[];
-      console.log(JSON.stringify(filtered)+"typeof"+typeof filtered);
-      for(var key of Object.values(menu)){
+   
+	  
+      for(var key of Object.values(temp)){
         console.log(key.category);
-        arr1.push(key.category);
+		arrCategory.push(key.category);
+		arrPrice.push(key.price);
+		 str+="<tr><td>"+key.title+"</td><td>"+key.description+"</td><td>"+key.category+"</td><td>"+key.price+"</td><td>"+key.availableQuantity+"</td><td>"+key.daysToShip+"</td><td>"+key.warranty+"</td></tr>";
+        
       }
-       
-    console.log(arr1.unique());
+	
+     str+="</table>";  
+	 
+	// temp=menu;
+	 
+ }
+ 
+ 
+ function onload(){
+	 tableManipulation();
+	 document.getElementById("appenderId").innerHTML=str;
+	 str="";
+	 console.log(arrCategory.unique()+"ok"+arrPrice.unique().sort())
+	 categorySelector(arrCategory.unique());
+	 priceSelector(arrPrice.unique());
+	 
+	 }
+  function categorySelector(arr){
+     var text="<option>select</option>";
+	 for(var i of arr){
+	 text+="<option>"+i+"</option>";
+	 }
+	 document.getElementById("category").innerHTML=text;
+	 //selectedCategory();
+  }
+  function priceSelector(arr){
+     var text="<option>select</option>";
+	 for(var i of arr){
+	 text+="<option>"+i+"</option>";
+	 }
+	 document.getElementById("rate").innerHTML=text;
+	 
+  }
+  function selectedCategory(elem){
+  var idVal=elem.id;
+  
+     var x = document.getElementById(idVal).selectedIndex;
+       //alert(document.getElementsByTagName("option")[x].value);
+	   filteringVal(document.getElementsByTagName("option")[x].value)
+  }
+  function filteringVal(val){
+ // alert(val);
+ if(val!="select"){
+  var filtered = menu.filter(function(item){
+         return item.category==val;
+       });
+	 temp=filtered;
+	}else{
+	temp=menu;
+	}
+	  // console.log(filtered);
+   
+   console.log(JSON.stringify(temp));
+   //filtered="";
+   tableManipulation();
+   document.getElementById("appenderId").innerHTML=str;
+   str="";
+  }
+ 
+    
     </script>
     <style>
         ul{ list-style-type: none;}
+		td,th{border:solid 1px black;}
     </style>
     
 </head>
-<body onload="">
-<div  id="appenderId" style="border:solid 1px green;top:0px;left:0px;float:left;">
-ddsfsdg
+<body onload="onload();">
+<select id="category" onchange="selectedCategory(this)" ></select>
+<select id="rate" onchange="selectedCategory(this)" ></select>
+<div  id="appenderId" style="border:solid 1px green;top:0px;left:0px;">
 </div>
    <div id="content_area" style="width:150px;height:500px;border:solid 1px red;border:solid 1px red;float:left"></div>
    
