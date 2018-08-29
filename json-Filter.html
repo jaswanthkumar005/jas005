@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<title></title>
+<head>
+    <script>
+     
+     
+        
+       var menu=[
+{
+    "title": "Desktop",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    "category": "Hardware",
+    "price": "400",
+    "availableQuantity": "5",
+    "daysToShip": "7",
+    "warranty": "10"
+},
+{
+    "title": "MySQL",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    "category": "Software",
+    "price": "150",
+    "availableQuantity": "50",
+    "daysToShip": "1",
+    "warranty": "0"
+},
+{
+    "title": "MacBook",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    "category": "Hardware",
+    "price": "600",
+    "availableQuantity": "19",
+    "daysToShip": "5",
+    "warranty": "11"
+},
+{
+    "title": "Adobe CC",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    "category": "Cloud",
+    "price": "700",
+    "availableQuantity": "10",
+    "daysToShip": "1",
+    "warranty": "0"
+},
+{
+    "title": "Outlook Mail",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    "category": "Cloud",
+    "price": "100",
+    "availableQuantity": "100",
+    "daysToShip": "1",
+    "warranty": "0"
+},
+{
+    "title": "Mobile",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    "category": "Hardware",
+    "price": "500",
+    "availableQuantity": "90",
+    "daysToShip": "5",
+    "warranty": "10"
+},
+{
+    "title": "Keyboard",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    "category": "Hardware",
+    "price": "50",
+    "availableQuantity": "110",
+    "daysToShip": "5",
+    "warranty": "15"
+},
+{
+    "title": "Microsoft Team Foundation Server",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    "category": "Cloud",
+    "price": "1100",
+    "availableQuantity": "90",
+    "daysToShip": "1",
+    "warranty": "0"
+},
+{
+    "title": "Microsoft Office",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    "category": "Software",
+    "price": "600",
+    "availableQuantity": "75",
+    "daysToShip": "1",
+    "warranty": "0"
+},
+{
+    "title": "Harddisk",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    "category": "Hardware",
+    "price": "150",
+    "availableQuantity": "40",
+    "daysToShip": "3",
+    "warranty": "365"
+}];
+       
+       var menu2={
+           "content":"content of our main intro",
+           "subber":"jaswanth",
+           "sub1":"sub1 content",
+           "sub2":"sub2 content",
+           "sub3":"sub3 content",
+           "content main1":"content1",
+           "subber1":"jaswanth2"
+       };
+       
+
+Array.prototype.unique=function(){
+  var arr =[];
+  for(var i=0;i<this.length;i++){
+    if(!arr.includes(this[i])){
+      arr.push(this[i]);
+    }
+  }
+  return arr;
+}
+       var filtered = menu.filter(function(item){
+         return item.category=="Hardware";
+       });
+       var str ="<table><>";
+       
+var arr1=[];
+      console.log(JSON.stringify(filtered)+"typeof"+typeof filtered);
+      for(var key of Object.values(menu)){
+        console.log(key.category);
+        arr1.push(key.category);
+      }
+       
+    console.log(arr1.unique());
+    </script>
+    <style>
+        ul{ list-style-type: none;}
+    </style>
+    
+</head>
+<body onload="">
+<div  id="appenderId" style="border:solid 1px green;top:0px;left:0px;float:left;">
+ddsfsdg
+</div>
+   <div id="content_area" style="width:150px;height:500px;border:solid 1px red;border:solid 1px red;float:left"></div>
+   
+
+
+</body>
+</html>
