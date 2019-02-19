@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <style>
+  .popup{
+     width:100%;
+	 height:100%;
+	 border:solid 2px red;
+	 display:none;
+  }
+  </style>
+  <script>
+ var ctn=1;
+ function submitCheck(){
+	 var obj={};
+      var x=document.getElementById("exampleInput1").value;
+	  var y=document.getElementById("exampleInput2").value;
+	  var z=document.getElementById("exampleInput3").value;
+	  var j=document.getElementById("exampleInput4").value;
+	  obj.asset=x;
+	  obj.name=y;
+	  obj.Brand=z;
+	  obj.comment=j;
+	  
+	 red(obj);
+	  document.getElementById("myForm").reset();
+	  return obj;
+	};
+function red(obj){
+
+  // this will grab you the return value from firstFunction();
+console.log(Object.values(obj));
+var str="";
+str+="<td>"+ctn+"</td>"
+for(var x in obj ){
+
+str+="<td>"+obj[x]+"</td>"
+ console.log(obj[x]);
+}
+ctn++;
+
+str+="<td><i class=\"fa fa-trash \"></i>&nbsp;<i class=\"fa fa-edit\"></i> </td>";
+console.log(str);
+var textnode = document.createElement("tr");
+textnode.innerHTML=str;
+document.getElementById("datapoint").appendChild(textnode);
+//document.getElementById("datapoint").innerHTML=str;
+
+
+//return false;
+}
+
+
+  
+/*
+
+var oReq = new XMLHttpRequest();
+oReq.addEventListener("load", reqListener);
+oReq.open("GET", "https://api.myjson.com/bins/d183m");
+
+ oReq.onreadystatechange = function () {
+  if(oReq.readyState === 4 && oReq.status === 200) {
+    console.log(oReq.responseText);
+  }
+};
+oReq.send(ste);
+
+var xmlhttp = new XMLHttpRequest();   
+xmlhttp.open("POST", "https://api.myjson.com/bins/d183m");
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+ xmlhttp.onreadystatechange = function () {
+  if(xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+    console.log(xmlhttp.responseText);
+  }
+  };
+xmlhttp.send(JSON.stringify({ "email": "hello@user.com", "response": { "name": "Tester" } }));
+function reqListener () {
+
+ 
+  console.log(this.responseText);
+}
+*/
+	
+	
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container" >
+  <div class="row">
+  <div class="col-md-10 ">
+  <div class="table-responsive">
+  <table class="table table-bordered table-striped table-highlight" style="text-align:center;">
+    <thead>
+	<tr >
+	<th>S No.</th>
+	<th>Asset No.</th>
+	<th>Name</th>
+	<th>Brand</th>
+	<th>Status comment</th>
+	<th>Edit/Add</th>
+	</tr>
+	</thead>
+	
+	<tbody id="datapoint">
+	
+	
+	</tbody>
+	
+
+  </div>
+  </div>
+   <div class="col-md-2 mb-4 btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add</button></div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+ <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+	  <div class="modal-body">
+        <form name="myForm" id="myForm">
+		  <div class="form-group">
+		  <label for="exampleInputEmail1">Asset No.</label>
+		  <input type="number" class="form-control" id="exampleInput1"  placeholder="Asset No.">
+		  </div>
+		  <div class="form-group">
+		  <label for="exampleInputEmail1">Name</label>
+		  <input type="text" class="form-control" id="exampleInput2"  placeholder="Name">
+		  </div>
+		  <div class="form-group">
+		  <label for="exampleInputEmail1">Brand</label>
+		  <input type="text" class="form-control" id="exampleInput3"  placeholder="Brand">
+		  </div>
+		  <div class="form-group">
+		  <label for="exampleInputEmail1">Status comment</label>
+		  <textarea type="text" class="form-control" id="exampleInput4"  placeholder="Status comment"></textarea>
+		  </div>
+		  <button type="submit" class="btn btn-primary" onClick="submitCheck()" data-dismiss="modal" >Submit</button>
+		</form>
+		<form>
+		
+		<p style="font-weight:bold;margin:10px;">OR</p>
+		  <div class="form-group">
+			<label for="exampleFormControlFile1">Example file input</label>
+			<input type="file" class="form-control-file" id="exampleFormControlFile1">
+		  </div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+      </div>
+ </div>
+  
+</div>
+</div>
+</div>
+
+
+</body>
+</html>
