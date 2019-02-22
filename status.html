@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <style>
+  .popup{
+     width:100%;
+	 height:100%;
+	 border:solid 2px red;
+	 display:none;
+  }
+  </style>
+  <script>
+ var ctn=1;
+ var isEdit=false;
+ var isDelete=false;
+ var editValue="";
+ var rowsLength=0;
+ 
+ function submitCheck(){
+ 
+	 var obj={};
+      var x=document.getElementById("exampleInput1").value;
+	  var y=document.getElementById("exampleInput2").value;
+	  var z=document.getElementById("exampleInput3").value;
+	  var j=document.getElementById("exampleInput4").value;
+	  obj.asset=x;
+	  obj.name=y;
+	  obj.Brand=z;
+	  obj.comment=j;
+	  if(isEdit){
+	  isEdit=false;
+	  editorFunc(obj,editValue);
+	    
+	  }else{
+	  adder(obj);
+	  }
+	  document.getElementById("myForm").reset();
+	  return obj;
+	};
+	
+function editorFunc(obj,editValue){
+
+	 var str="";
+	 var reter=editValue.split("_")[1];
+	str+="<td>"+reter+"</td>"
+	for(var x in obj ){
+
+	str+="<td>"+obj[x]+"</td>"
+	 console.log(obj[x]);
+	}
+
+	str+="<td><i class=\"fa fa-trash \"></i>&nbsp;<i class=\"fa fa-edit\" data-toggle=\"modal\" data-target=\"#myModal\" data-value=\"btn_"+reter+"\"onClick=\"res(this)\"></i> </td>";
+
+	 var par = document.getElementById(editValue).innerHTML=str;
+}
+function adder(obj){
+		console.log(Object.values(obj));
+		if(isDelete){
+
+			 ctn=rowsLength-1;
+			 isDelete=false;
+		}
+      var str="";
+		str+="<td>"+ctn+"</td>"
+		for(var x in obj ){
+
+		str+="<td>"+obj[x]+"</td>"
+		 console.log(obj[x]);
+		}
+
+		str+="<td><i class=\"fa fa-trash \" data-value=\"btn_"+ctn+"\"onClick=\"del(this)\"></i>&nbsp;<i class=\"fa fa-edit\" data-toggle=\"modal\" data-target=\"#myModal\" data-value=\"btn_"+ctn+"\"onClick=\"res(this)\"></i> </td>";
+
+		console.log(str);
+		var textnode = document.createElement("tr");
+
+		textnode.setAttribute("id", "btn_"+ctn);
+		textnode.innerHTML=str;
+		document.getElementById("datapoint").appendChild(textnode);
+
+
+		ctn++;
+}
+function res(e){
+ isEdit=true;
+ editValue=e.getAttribute('data-value');
+
+  var childNode=e.parentNode;
+  var parent=childNode.parentNode;
+  for(var i=1;i<parent.childNodes.length-1;i++){
+    var temp=parent.childNodes[i].outerHTML.replace("<td>"," ").replace("</td>"," ");
+
+	document.getElementById("exampleInput"+i).value=temp;
+  }
+  var vals = Object.keys(childNode).map(function(key) {
+         
+    return childNode[key];
+});
+  console.log(vals);
+ 
+  
+  
+}
+function closefun(){
+
+    document.getElementById("myForm").reset();
+}
+function del(e){
+isDelete=true;
+  var delValue=e.getAttribute('data-value');
+  var oldCount=parseInt(delValue.split("_")[1]);
+  var countChange=parseInt(delValue.split("_")[1])+1;
+  var prevValue=delValue;
+  var nextValue="btn_"+countChange;  
+  console.log(e.parentNode.parentNode.parentNode.childNodes.length);
+  var rows=e.parentNode.parentNode.parentNode.childNodes;
+
+  var rowFirstElementDel=e.parentNode.parentNode.parentNode.childNodes[1];
+  rowsLength=e.parentNode.parentNode.parentNode.childNodes.length;
+  //alert(rowsLength+"rowsLength");//5
+   for(var i=1;i<rowsLength;i++){
+      if(i <= oldCount){
+	     continue;
+	  }
+		//alert(i);//3
+    console.log(e.parentNode.parentNode.parentNode.childNodes[i].lastChild.getElementsByTagName("i")[0]);
+	e.parentNode.parentNode.parentNode.childNodes[i].firstChild.innerHTML=i-1;
+	var iValue=i-1;
+	e.parentNode.parentNode.parentNode.childNodes[i].setAttribute('id', "btn_"+iValue);
+//	var iLen= e.parentNode.parentNode.parentNode.childNodes[i].lastChild.childNodes[i].length;
+	 
+	 // alert(parseInt(iValue));
+	e.parentNode.parentNode.parentNode.childNodes[i].lastChild.getElementsByTagName("i")[0].setAttribute("data-value","btn_"+iValue);
+	e.parentNode.parentNode.parentNode.childNodes[i].lastChild.getElementsByTagName("i")[1].setAttribute("data-value","btn_"+iValue);
+	
+   }
+   var idVal=document.getElementById(prevValue).lastChild.childNodes.length;
+  
+    var elem = document.getElementById(delValue);
+  elem.parentNode.removeChild(elem);  
+
+
+}
+
+	
+	
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container" >
+  <div class="row">
+  <div class="col-md-10 ">
+  <div class="table-responsive">
+  <table class="table table-bordered table-striped table-highlight" style="text-align:center;">
+    <thead>
+	<tr >
+	<th>S No.</th>
+	<th>Asset No.</th>
+	<th>Name</th>
+	<th>Brand</th>
+	<th>Status comment</th>
+	<th>Edit/Add</th>
+	</tr>
+	</thead>
+	
+	<tbody id="datapoint">
+	
+	
+	</tbody>
+	
+
+  </div>
+  </div>
+   <div class="col-md-2 mb-4 btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add</button></div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+ <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" onClick="closefun()">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+	  <div class="modal-body">
+        <form name="myForm" id="myForm">
+		  <div class="form-group">
+		  <label for="exampleInputEmail1">Asset No.</label>
+		  <input type="text" class="form-control" id="exampleInput1"  placeholder="Asset No.">
+		  </div>
+		  <div class="form-group">
+		  <label for="exampleInputEmail1">Name</label>
+		  <input type="text" class="form-control" id="exampleInput2"  placeholder="Name">
+		  </div>
+		  <div class="form-group">
+		  <label for="exampleInputEmail1">Brand</label>
+		  <input type="text" class="form-control" id="exampleInput3"  placeholder="Brand">
+		  </div>
+		  <div class="form-group">
+		  <label for="exampleInputEmail1">Status comment</label>
+		  <textarea type="text" class="form-control" id="exampleInput4"  placeholder="Status comment"></textarea>
+		  </div>
+		  <button type="submit" class="btn btn-primary" onClick="submitCheck()" data-dismiss="modal" >SAVE</button>
+		</form>
+		<form>
+		
+		<p style="font-weight:bold;margin:10px;">OR</p>
+		  <div class="form-group">
+			<label for="exampleFormControlFile1">Example file input</label>
+			<input type="file" class="form-control-file" id="exampleFormControlFile1">
+		  </div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal" onClick="closefun()">Close</button>
+      </div>
+ </div>
+  
+</div>
+</div>
+</div>
+
+
+</body>
+</html>
