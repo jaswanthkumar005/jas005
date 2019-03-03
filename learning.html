@@ -27,3 +27,11 @@ when a function is created it create a object for itself and a prototype
 Automatically created prototype object is actually created using new Object()
 
 reverse() method work for Array for string we need to convert to array using split
+reduce(): reduce(fn,start)  fn=(rev,char)=>char+rev and reduce is method of Array
+var a= "abcbad";
+
+var red = a.split("").every((char,i)=>{
+  return char === a[a.length-i-1];
+})
+
+
