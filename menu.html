@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<title></title>
+<head>
+    <script>
+     
+     
+        
+       var menu={
+           "content main":"content",
+           "subber":{"content1":"sub1","content2":"sub2","content3":"sub3"},
+           "subber1":{"content1":"sub1","content2":"sub2","content3":"sub3"}
+          
+       };
+       
+       var menu2={
+           "content":"content of our main intro",
+           "subber":"jaswanth",
+           "sub1":"sub1 content",
+           "sub2":"sub2 content",
+           "sub3":"sub3 content",
+           "content main1":"content1",
+           "subber1":"jaswanth2"
+       };
+	   
+	   
+	  function func(){
+	     menuCreator();
+	  } 
+	  
+	  function menuCreator(){
+	   var ul= document.createElement("ul");
+	   var li = document.createElement("li");
+	   var str="";
+	   var menuKeys= Object.keys(menu);
+	   //console.log(menuKeys);
+	   str+="<ul>"
+	   for(var x of menuKeys){
+	      //console.log( typeof menu[x]);
+		  //console.log(x);
+	      console.log( menu[x]);
+		  
+		  if(typeof menu[x]=="object"){
+		    subMenu= Object.keys(menu[x]);
+			//console.log( Object.values(menu[x])+"menu");
+			str+="<li id='"+x+"' onclick='myfunction(this)'>"+x+"</li>"
+			for(var y of subMenu){
+			
+			str+="<ul>";
+			//console.log(menu[x][y]);
+			str+="<li id='"+menu[x][y]+"'class='hidder' onclick='myfunction(this)'>"+y+"</li>"
+			str+="</ul>"
+			}
+			
+		  
+		  }else{
+		    str+="<li id='"+menu[x]+"' onclick='myfunction(this)'>"+x+"</li>" 
+		  //console.log(x);
+		 
+		  
+		  }
+	  
+		  
+	   }
+	   str+="</ul>";
+	  // console.log(str);
+	   
+	   document.getElementById("appenderId").innerHTML=str;
+	  
+	  }
+	   
+	   function myfunction(elem){
+	     console.log(elem.id);
+		 document.getElementById("content_area").innerHTML= menu2[elem.id];
+	   }
+       
+     
+       
+    </script>
+    <style>
+ ul{list-style-type:none;}
+
+#appenderId li {
+  
+  list-style: none;
+  text-align: center;
+  background-color: #000000;
+  color:#fff;
+  margin-right: 30px;
+  width: 150px;
+  line-height: 60px;
+  border:solid 1px #fff;
+}
+#appenderId li ul{ display:none;}
+#appenderId li ul:hover{ display:block;}
+
+    </style>
+    
+</head>
+<body onload="func()">
+<div  id="appenderId" style="border:solid 1px green;top:0px;left:0px;float:left">
+
+</div>
+   <div id="content_area" style="border:solid 1px red;border:solid 1px red;float:left;width:300px;height:500px;"></div>
+   
+
+
+</body>
+</html>
