@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+	<script>
+	    const Http = new XMLHttpRequest();
+		const url='https://jsonplaceholder.typicode.com/posts';
+		Http.open("GET", url);
+		Http.send();
+		Http.onreadystatechange=(e)=>{
+		//console.log(Http.responseText);
+		if(this.readyState==4 && this.status==200){
+		console.log(Http.responseText);
+		
+	    }
+		}
+		
+		var obj={num:2};
+		var functionName= function(fname,lname){
+		   
+		console.log(JSON.stringify(obj)+"call methid"+lname);
+		}
+		functionName.apply(obj,["jas","kumar"])
+		var bound = functionName.bind(obj);
+		bound("jas","red");
+		
+		(function(){
+		  var a=b=3;
+		})();
+		
+		console.log(typeof a);
+		console.log(typeof b+b);
+		
+		var myObj={
+		foo:"bar",
+		func:function(){
+		 var self=this;
+		 console.log(this.foo);
+		 console.log(self.foo);
+		 (function(){
+		 console.log(this.foo);
+		 console.log(self.foo);
+		 
+		 })();
+		 }
+		
+		}
+		myObj.func();
+		function foo1(){
+		  return{
+		   bar:"hello"
+		  };
+		}
+		function foo2(){
+		  return{
+		   bar:"bye"
+		  };
+		}
+		console.log(foo1());
+		console.log(foo2());
+		var x=NaN;
+		console.log(x!==x);
+		console.log(undefined+NaN+"red");
+		console.log(0.2+0.1==0.3);
+		console.log(1.2+1.1==2.3);
+		
+		x = 0.2;
+	    y = 0.1;
+        z = 0.3;
+       equal = (Math.abs(0.2+0.1-0.3) < Number.EPSILON);
+       console.log(equal+":::euqal");
+	   
+	   
+      function sum(x){
+	     if(arguments.length==2){
+		 return arguments[0]+arguments[1];
+		 }else{
+		 return function(y){
+		  return x+y;
+		 }
+		 }
+	   
+	  }	  
+     console.log(sum(1,2));
+     console.log(sum(1)(2));	 
+	 
+	 function dam(){
+	
+	 for(let i=0;i<5;i++){
+	 var btn= document.createElement('button');
+	 btn.appendChild(document.createTextNode('button_'+i));
+	  
+	 btn.addEventListener("click",function(){
+	 alert(i);
+	   console.log(i);
+	 });
+	 
+	// document.body.appendChild(btn);
+	 }
+	 
+	 }
+	 dam();
+	 
+	 Array.prototype.unique= function(){
+	     var temp=[];
+		 for(i=0;i<this.length;i++){
+		    if(!temp.includes(this[i])){
+			 
+			  temp.push(this[i]);
+			}
+		 
+		 }
+		 return temp;
+	 };
+	 Array.prototype.vijay= function(){
+	 alert("vijay");
+	   var temp=[];
+	    for(i=0;i<this.length;i++){
+		   console.log(this[this.length-i-1]);
+		   temp.push(this[this.length-i-1]);
+	  }
+	 return temp;
+	 }
+	 String.prototype.jaswanth= function(){
+	// alert(typeof this);
+	 var temp="";
+	  for(i=0;i<this.length;i++){
+		    temp= this[i]+temp;
+	  }
+	  return temp;
+	 }
+	 
+	 Object.prototype.finder=function(){
+	 var temp=[];
+	 temp.push(this);
+	 //alert(temp+":");
+	   if(Object.prototype.toString.call(this) === '[object Array]'){
+	  // alert("arr");
+	      temp.vijay();
+	   }
+	 
+	 }
+	 
+	 var arr1=[1,2,3,3];
+	 var zen="vijayakm";
+	 zen.jaswanth();
+	 console.log(arr1.unique());
+	 console.log(arr1.finder());
+	 console.log(zen.jaswanth());
+     </script>
+	 
+	 
+	 <style>
+	   
+
+	
+		.green-square {
+		  background-color: #3D9970;
+		  width: 100px;
+		  height: 100px;
+		  position: absolute;
+		  left: 50%;
+		  top:50%;
+		  margin-left: -50px;
+		  margin-top:-50px;
+		}
+		
+		
+		
+		html,body{
+		
+		   height:100%;
+		}
+		.flex-square{
+		 display:flex;
+		  height:100%;
+		  align-items:center;
+		  justify-content:center;
+		
+		}
+		
+		.blue-square {
+		  background-color: #0074D9;
+		  width: 100px;
+		  height: 100px;
+		  
+		}
+		
+
+	 </style>
+	</head>
+  <body onload="dam()">
+    <div class="container-fluid">
+	 <!-- <h1>Hello, world!</h1> -->
+  <!-- Content here -->
+          
+		  <div class="flex-square"><div class="blue-square"></div></div> 
+		  <!--  <div class="green-square"></div> -->
+		   <!-- <p>As much mud in the streets as if the waters had but newly retired from the face of the earth, and it would not be wonderful to meet a Megalosaurus, forty feet long or so, waddling like an elephantine lizard up Holborn Hill</p> -->
+     </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+  </body>
+</html>
