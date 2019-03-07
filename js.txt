@@ -1,0 +1,45 @@
+A pure function is a function which:
+Given the same input, will always return the same output.
+Produces no side effects.
+Math.max(),double()
+pure functions are completely independent of outside state, and as such, they are immune to entire classes of bugs that have to do with shared mutable state
+Pure functions are also extremely independent — easy to move around, refactor, and reorganize in your code, making your programs more flexible and adaptable to future changes.
+
+Function composition is the process of combining two or more functions to produce a new function. Composing functions together is like snapping together a series of pipes for our data to flow through.
+ input.split(' ')
+    .map(str => str.toLowerCase())
+    .join('-')
+	
+
+Functional programming (often abbreviated FP) is the process of building software by composing pure functions, avoiding shared state, mutable data, and side-effects. Functional programming is declarative rather than imperative, and application state flows through pure functions. Contrast with object oriented programming, where application state is usually shared and colocated with methods in objects.
+
+Curry: A function that takes a function with multiple parameters as input and returns a function with exactly one parameter.
+
+
+Prototypes
+When a function is created in JavaScript, JavaScript engine adds a prototype property to the function. This prototype property is an object (called as prototype object) has a constructor property by default. constructor property points back to the function on which prototype object is a property. We can access the function’s prototype property using the syntax functionName.prototype.	
+	
+private static function in javascript	
+using some singleton pattern we can do private static function in javascript
+var obj = (function () {
+
+   //"private" variables:
+   var myPrivateVar = "I can be accessed only from within obj.";
+
+   //"private" method:
+   var myPrivateMethod = function () {
+      console.log("I can be accessed only from within obj");
+   };
+
+   return {
+      myPublicVar: "I'm accessible as obj.myPublicVar",
+
+      myPublicMethod: function () {
+         console.log("I'm accessible as obj.myPublicMethod");
+
+         //Within obj, I can access "private" vars and methods:
+         console.log(myPrivateVar);
+         console.log(myPrivateMethod());
+      }
+   };
+})();
