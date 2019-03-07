@@ -43,3 +43,8 @@ var obj = (function () {
       }
    };
 })();
+
+In javascrpt functions are first class objects. so, we can pass functions as an argument to another fn
+call back fn is also called as higher order function
+throttle with reduce event triger rate
+deboucing will stop event trigger rate to  0 until one event listener get over uses set time out
