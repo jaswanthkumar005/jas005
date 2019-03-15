@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <style>
+  .popup{
+     width:100%;
+	 height:100%;
+	 border:solid 2px red;
+	 display:none;
+  }
+  #container{
+    width:1024px;
+	height:768px;
+	text-align:center;
+  }
+  #header{
+    width:100%;
+	height:50px;
+  }
+  #main{
+  float:left;
+  list-style-type:none;
+
+  }
+   #main li{
+     border:solid 1px red;
+	 border-radius:10px;
+	 text-align:center;
+	 background-color:grey;
+   }
+  #red{
+  margin-top:10px;
+  list-style-type:none;
+  }
+  </style>
+  <script>
+ Array.prototype.unique= function(){
+    var temp=[];
+	for(var i=0;i<this.length;i++){
+	  if(!temp.includes(this[i])){
+	  temp.push(this[i]);
+	  }
+	}
+	return temp;
+ }
+ var x=[1,2,4,3,2];
+// console.log(x.unique());
+  function myload(){
+ var xhttp = new XMLHttpRequest();
+
+xhttp.onreadystatechange = function(){
+  if(xhttp.readyState == 4 && xhttp.status == 200){
+ // console.log(xhttp.responseText);
+    restore(xhttp.responseText);
+  
+  }
+};
+xhttp.open("GET","https://api.jsonbin.io/b/5c8210a92e4731596f1a198c",true);
+xhttp.send();
+}
+function restore(val){
+  //console.log(JSON.parse(val)[0]);
+
+  var refinedArr = [];
+  var temp = JSON.parse(val);
+  for(var x of JSON.parse(val)){
+    if(refinedArr.length==5){
+      break;
+    }
+    refinedArr.push(x)
+  }
+ // console.log(refinedArr);
+  stringManipulation(refinedArr);
+}
+
+function stringManipulation(val){
+  var str = "";
+  var tempArr=[];
+  var filArr;
+  
+   //console.log(JSON.stringify(val[0])+"val"+val[0]["avatar_url"]+" "+val[0]["name"]+" "+val[0]["repositories"].length);
+   for(var i=0; i<val.length; i++){
+   str+=`<ul id="main"><li><img src=${val[i]["avatar_url"]} width="50" height="50"><span>${val[i]["name"]}</span></li>`;
+  var temp = val[i]["repositories"];
+  console.log(temp+"temp");
+   if(val[i]["repositories"].length > 1){
+     for(var j=0; j<val[i]["repositories"].length; j++){
+       console.log(val[i]["repositories"][j]["languages"]);
+	   tempArr.push(val[i]["repositories"][j]["name"]);
+     }
+	 filArr = tempArr.unique();
+	 for(var k of tempArr.unique()){
+	 
+	 str+=`<ul id="red"><li>${k}</li></ul>`;
+	 }
+	 tempArr=[];
+	 
+     str+=`</ul>`
+   }
+   }
+   //console.log(str);
+   document.getElementById("content_area").innerHTML=str;
+   //console.log( document.getElementById("app1").outerHTML);
+}
+	
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body onload= "myload()">
+
+<div id="container" >
+<div id="header">
+<select style="text-align:left;"><option>x</option></select>
+</div>
+<div id="content_area"></div>
+  
+</div>
+
+
+</body>
+</html>
