@@ -1,0 +1,4 @@
+Registeration
+1)	Fname,lname,age,dob(calculator)-next->
+2)	Address- country, state, address –special valiation
+3)	Email id, pancard –submit – alert(json) 
