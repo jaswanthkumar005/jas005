@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <style>
+  .main{
+     width:1000px;
+	 height:auto;
+	 border:solid 2px red;
+	 margin:0 auto;
+	 
+  }
+  input{
+   margin:20px;
+  }
+  #submit{
+   text-align:right;
+  }
+ 
+  </style>
+  <script> 
+	var output = {}; 
+
+    var addressJson={
+     	"country":{
+
+               "india":["tamilnadu","andhra","madhya"],
+               "china":["chei","yei","bei"]
+     	}
+     }
+	// Variable to count number of attempts.
+	// Below function Executes on click of login button.
+	function myfun(){
+      console.log("fdsfd");
+     // getJson();
+     red();
+		var mydate= new Date();
+		//2018-12-31;
+		//max="2014-05-20"
+		//alert();
+		var currDate=(mydate.getFullYear()-1)+'-'+(mydate.getMonth()+1)+'-'+('0'+mydate.getDate());
+		console.log(currDate);
+		document.getElementById('DOB').setAttribute("max",currDate);
+
+	}
+
+	function red(){
+
+		var getJson= addressJson;
+
+		console.log(getJson);
+        var countryOption="";
+        var text="";
+		for(var x of Object.keys(getJson.country)){
+            console.log(x);
+            text+="<option>"+x+"</option>";
+		}
+       document.getElementById("contry").innerHTML=text;
+	}
+	function selectedCategory(elem){
+      var idVal=elem.id;
+      var x= document.getElementById(idVal).selectedIndex;
+      changeStateDropDown(document.getElementsByTagName("option")[x].value);
+	}
+	function changeStateDropDown(val){
+		//alert();
+		var text=""
+		console.log(addressJson.country[val]);
+       for(x of addressJson.country[val]){
+       	text+="<option>"+x+"</option>";
+       }
+       document.getElementById("state").innerHTML=text;
+	}
+	function getJson(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			if(this.readyState ==4 && this.status==200){
+				console.log(xhttp.responseText);
+			}
+		}
+		xhttp.open("GET","./addressJson.JSON",true);
+		xhttp.send();
+	}
+	function getAge(dateString) {
+		
+	dateString= dateString.replace("-","/");
+    var today = new Date();
+   
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+	 console.log(age);
+    return age;
+}
+
+function validateAddress(){
+    var TCode = document.getElementById('address').value;
+
+    if( /[^a-zA-Z0-9\-\/]/.test( TCode ) ) {
+        alert('Input is not alphanumeric');
+        return false;
+    }
+
+    return true;     
+}
+	function validate(){
+	
+	
+	
+	//console.log(mydate);
+	//getAge(mydate);
+	//document.getElementById("age").value=getAge(mydate);
+	//fNameValidator();
+	//lNameValidator();
+	//getBirthday();
+	//alert(JSON.stringify(output));
+	if(fNameValidator()&&lNameValidator()&&getBirthday()){
+
+		alert("valid");
+		
+		document.getElementById("form_id").style.display="none";
+
+	}
+	} 
+
+	function validate1(){
+	  output.state=document.getElementById("state").value;
+	  	alert(JSON.stringify(output));
+	}
+	
+	function serverValue(){
+		var getJson= addressJson;
+
+		console.log(getJson);
+        var countryOption="";
+        var text="";
+         text+="<option> select</option>";
+		for(var x of Object.keys(getJson.country)){
+            console.log(x);
+            text+="<option>"+x+"</option>";
+		}
+       document.getElementById("contry").innerHTML=text;
+	}
+	function fNameValidator(){
+		//maxlength,no special character,minlength,
+	  var username = document.getElementById("username").value;
+	  console.log(username);
+	  if(!specialCharacterValidator(username,"text") || username=="" ){
+	     alert("please enter firstName value");
+	   return false ;
+	  }
+	  if(username.length<5){
+
+	  	alert("less username");
+	  	return false;
+	  }
+
+	  return output.firstName=username;
+	
+	}
+	function lNameValidator(){
+	 var lname = document.getElementById("password").value;
+	 alert(lname);
+	 //console.log(specialCharacterValidator(lname,"text"));
+	 if(!specialCharacterValidator(lname,"text") || lname=="" ){
+	   alert("please enter lastName value");
+	   return false;
+	  }
+	   output.lastName=lname;
+	   return true;
+	}
+	function getBirthday(){
+		var mydate= document.getElementById("DOB").value;
+		 console.log(mydate);
+		var age=getAge(mydate);
+	document.getElementById("age").value=age;
+	output.dob=mydate;
+	output.age=age;
+
+	return true;
+	
+	}
+	
+	  function specialCharacterValidator(username, value) {
+        //Regex for Valid Characters i.e. Alphabets, Numbers and Space. /^[a-zA-Z0-9 ]+$/
+        // /^[0-9 ]+$/
+        // /^\S+@\S+$/
+		var regex;
+		if(value == "number"){
+         regex = /^[0-9 ]+$/
+		}
+		
+		if(value == "text"){
+		   regex = /^[a-zA-Z ]+$/
+		}
+		if(value == "email"){
+		   regex =/^\S+@\S+$/
+		 
+		}
+		if(value=="address"){
+         regex= /^[a-zA-Z0-9\s,'-]*$/;
+		}
+ 
+        //Validate TextBox value against the Regex.
+        var isValid = regex.test(username);
+        if (!isValid) {
+            alert("Contains Special Characters.instead of "+ value);
+        } else {
+            alert("Does not contain Special Characters.instead of "+ value);
+        }
+        
+        return isValid;
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  
+
+ 
+</head>
+<body onload="myfun()">
+
+<div class="container"  >
+
+	<div class="main">
+
+		<form id="form_id" method="post" class="forms" name="myform">
+		<label>User Name :</label>
+		<input type="text" name="username" id="username" minlength="2" /><br/>
+		<label>last Name :</label>
+		<input type="text" name="password" id="password" minlength="5" /><br/>
+		<label>DOB :</label>
+	    <input type="date" name="birth date" id="DOB" placeholder="yyyy/mm/dd" maxlength="10" pattern="\d{1,2}\/\d{1,2}\/\d{4}"   required="required"/><br/>
+		<label>age :</label>
+	    <input type="number" name="birth date" id="age" maxlength="10"  required="required" disabled/><br/>
+
+		<input type="button" value="Next" id="submit" onclick="validate()"  />
+		</form>
+
+		<form id="form_id2" method="post" class="forms" name="myform2">
+		<label>Address :</label>
+		<textarea id="" cols="40" rows="5"></textarea> <br/><br/>
+		<label>country :</label>
+		<select id="contry" onchange="selectedCategory(this)"><option>select</option></select><br/><br/>
+		<label>state :</label>
+		<select id="state"><option>select</option></select><br/>
+		
+
+		<input type="button" value="Next" id="submit" onclick="validate1()"  />
+		</form>
+		
+
+	</div>
+
+  
+</div>
+
+
+</body>
+</html>
