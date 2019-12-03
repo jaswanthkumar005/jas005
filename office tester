@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <style>
+  .main{
+     width:1000px;
+	 height:auto;
+	 border:solid 2px red;
+	 margin:0 auto;
+	 
+  }
+  input{
+   margin:20px;
+  }
+  #submit{
+   text-align:right;
+  }
+  </style>
+  <script> 
+	var attempt = 3; // Variable to count number of attempts.
+	// Below function Executes on click of login button.
+	function main(){
+
+	}
+	function getAge(dateString) {
+	dateString= dateString.replace("-","/");
+    var today = new Date();
+   
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+	 console.log(age);
+    return age;
+}
+
+function validateAddress(){
+    var TCode = document.getElementById('address').value;
+
+    if( /[^a-zA-Z0-9\-\/]/.test( TCode ) ) {
+        alert('Input is not alphanumeric');
+        return false;
+    }
+
+    return true;     
+}
+	function validate(){
+	
+	
+	var mydate= document.getElementById("DOB").value;
+	//console.log(mydate);
+	//getAge(mydate);
+	//document.getElementById("age").value=getAge(mydate);
+	fNameValidator();
+	lNameValidator();
+	//getBirthday();
+	} 
+	
+	function fNameValidator(){
+	  var username = document.getElementById("username").value;
+	  console.log(username);
+	  if(!specialCharacterValidator(username,"text") && username=="" ){
+	   console.log("please enter number value");
+	   return false ;
+	  }
+	
+	}
+	function lNameValidator(){
+	 var password = document.getElementById("password").value;
+	 console.log(specialCharacterValidator(password,"email"));
+	 if(!specialCharacterValidator(password,"email") && password=="" ){
+	   console.log("please enter email value");
+	  }
+	}
+	function getBirthday(){
+	document.getElementById("age").value=getAge(mydate);
+	}
+	
+	  function specialCharacterValidator(username, value) {
+        //Regex for Valid Characters i.e. Alphabets, Numbers and Space.
+		var regex;
+		if(value == "number"){
+         regex = /^[0-9 ]+$/
+		}
+		
+		if(value == "text"){
+		   regex = /^[a-zA-Z0-9 ]+$/
+		}
+		if(value == "email"){
+		   regex =/^\S+@\S+$/
+		 
+		}
+ 
+        //Validate TextBox value against the Regex.
+        var isValid = regex.test(username);
+        if (!isValid) {
+            alert("Contains Special Characters.");
+        } else {
+            alert("Does not contain Special Characters.");
+        }
+ 
+        return isValid;}
+	</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <link type='text/css' rel='stylesheet' href='CSS/style.css' />
+<!--   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ -->
+</head>
+<body>
+
+<div class="container" onload="main()" >
+
+	<div class="main">
+
+	<form id="form_id" method="post" name="myform">
+	<label>User Name :</label>
+	<input type="text" name="username" id="username"/><br/>
+	<label>Password :</label>
+	<input type="text" name="password" id="password"/><br/>
+	<label>DOB :</label>
+    <input type="date" name="birth date" id="DOB" placeholder="yyyy/mm/dd" maxlength="10" pattern="\d{1,2}\/\d{1,2}\/\d{4}" required="required"/><br/>
+	<label>age :</label>
+    <input type="number" name="birth date" id="age" maxlength="10"  required="required" disabled/><br/>
+
+	<input type="button" value="Next" id="submit" onclick="validate()"  />
+	</form>
+	
+
+	</div>
+
+  
+</div>
+
+
+</body>
+</html>
