@@ -1,0 +1,278 @@
+// Handle all the logics once the document is ready
+let slides=[primaryDetails,travelDetails,travelerDetails,paymentDetails];
+let states=["Chennai","Mumbai","calcutta","Banglore"];
+let modes={
+	"Air":["Business class","Economic"],
+   "Train":["FC","SC"],
+   "Road":[""],
+   "Water":["FirstClass","super"]
+};
+let cardDetails=["Debit Card","Credit Card"];
+
+$(document).ready(function(){
+	//alert();
+	dateTracker();
+	travelerDetail();
+	paymentDetails();
+	console.log(Object.keys(modes).length);
+});
+
+function paymentDetails(){
+	var str=""
+	str+=`<option></option>`;
+	for(let card of cardDetails){
+   str+=`<option>${card}</option>`;
+	}
+	document.getElementById("ddPaymentMode").innerHTML=str;
+}
+
+function travelerDetail(){
+	
+	var str="";
+	str+="<option>Select City</option>"
+
+	for(let city of states){
+
+		str+=`<option>${city}</option>`;
+
+	}
+
+	document.getElementById("ddFrom").innerHTML=str;
+	document.getElementById("ddTo").innerHTML=str;
+   
+   var ways="";
+   ways+="<option>Select Mode</option>";
+   for(let path of Object.keys(modes)){
+   	ways+=`<option value=" ">${path}</option>`;
+   }
+
+   document.getElementById("ddMode").innerHTML=ways;
+
+}
+function paymentMode(elem){
+ var selectedOption= elem.options[elem.selectedIndex].innerHTML;
+ alert(selectedOption);
+ //Debit Card
+ if(selectedOption=="Debit Card"){
+  document.getElementById("lblCardNo").innerHTML="CVV No.";
+ }
+ if(selectedOption=="Credit Card") {
+   document.getElementById("lblCardNo").innerHTML="OTP No.";
+ }
+}
+function modeChange(elem){
+	var selectedOption= elem.options[elem.selectedIndex].innerHTML;
+	//alert(selectedOption);
+	//alert(modes[selectedOption]);
+
+	 var ways="";
+   ways+="<option>Select Mode</option>";
+   for(let path of modes[selectedOption]){
+   	ways+=`<option value=" ">${path}</option>`;
+   }
+
+   document.getElementById("ddCabinClass").innerHTML=ways;
+}
+
+function destinateSelect(elem){
+
+	let idIndex=elem.selectedIndex;
+	let idName=elem.id;
+	let from= document.getElementById("ddFrom");
+	let to=document.getElementById("ddTo");
+    if(from.selectedIndex == to.selectedIndex){
+    	alert("wrong dest");
+    }
+    if(idName="ddFrom"){
+   
+
+    }else if(idName="ddTo"){}
+
+	//alert(idName);
+
+
+	//if(elem.selectedIndex)
+
+}
+function dateTracker(){
+	 let currDate = new Date();
+	 let currDay=currDate.getDate();
+	 let currMonth=currDate.getMonth();
+	 let currYear=currDate.getFullYear();
+	 console.log(currMonth+1+""+currDay+""+currYear);
+	 currDate=currYear+"-"+(currMonth+1)+"-"+(currDay);
+
+	 document.getElementById("txtDob").setAttribute("max",currDate);
+	 document.getElementById("txtDoj").setAttribute("min",currDate);
+	 
+	 var val = JSON.stringify(Math.floor(1000 + Math.random() * 9000));
+	 //Math.floor(Math.random() * 10)
+     console.log(val);
+	 document.getElementById("txtBookingNo").value=currMonth+""+currDay+""+currYear+val;
+     document.getElementById("txtBookingDt").value=currMonth+"/"+currDay+"/"+currYear;
+	 return currDate;
+
+}
+
+
+function goToPage(slider, bool){
+//alert(slider);
+//$("section").hide();
+//alert(document.getElementById(slider).getAttribute("disabled"));
+
+var sectionName= document.getElementsByTagName("section");
+for(let i=0;i<sectionName.length;i++){
+	sectionName[i].style.display="none";
+}
+
+document.getElementById(slider).style.display="block";
+
+}
+
+
+function firstLetterUppercase(str){
+	
+	let idName=JSON.stringify(str.id);
+	console.log(str.value.charAt(0).toUpperCase()+str.value.slice(1));
+	document.getElementById(str.id).value=str.value.charAt(0).toUpperCase()+str.value.slice(1);
+	specialCharacterValidator(str,"text")
+  return str.value.charAt(0).toUpperCase()+str.value.slice(1);
+}
+
+function calculateAge(){
+ let inputDate=document.getElementById("txtDob").value;
+ console.log(inputDate);
+ myDob=inputDate.split("-");
+ let dobDay=myDob[2];
+ let dobMondth = myDob[1];
+ let dobYear=myDob[0];
+ console.log(dobMondth+"-"+dobDay+"-"+dobYear);
+ document.getElementById("txtDob").innerHTML=JSON.stringify(dobMondth+"/"+dobDay+"/"+dobYear);
+// document.getElementById("txtDob").value=JSON.stringify(dobMondth+"/"+dobDay+"/"+dobYear);
+ 
+ getAge(inputDate);
+ 
+ //console.log(currDate);
+ /*let currDay=currDate.getDate();
+ let currMonth=currDate.getMonth();
+ let currYear=currDate.getFullYear();
+ console.log(currMonth+currDay+currYear);
+document.getElementById("txtBookingNo").value=currMonth+""+currDay+""+currYear+val;
+document.getElementById("txtBookingDt").value=currMonth+"/"+currDay+"/"+currYear;*/
+}
+
+function getAge(ageVal){
+
+	let currDate = dateTracker();
+	let dob=ageVal.split("-");
+	//console.lo
+	console.log(currDate.split("-"));
+	let currdateSpliter=currDate.split("-");
+
+	let diffYear=currdateSpliter[0]-dob[0];
+	console.log(diffYear);
+	if(diffYear<18){
+		alert("not allowed to book");
+
+	}
+   
+
+
+}
+
+function getPhoneNumber(num){
+
+	   specialCharacterValidator(num.value,"number");
+
+}
+
+ function specialCharacterValidator(username, value) {
+ 	let regex;
+ 	alert(value);
+ 	if(value="number"){
+ 		regex=/^[0-9]+$/;
+ 	}
+ 	
+	if(value == "text"){
+		   regex = /^[a-zA-Z ]+$/
+		}
+	if(value == "email"){
+		   regex =/^\S+@\S+$/
+		 
+		}
+		if(value=="address"){
+         regex= /^[a-zA-Z0-9\s,'-]*$/;
+		}
+ 	 var isValid = regex.test(username);
+ 	 alert(isValid);
+        if (!isValid) {
+            alert("not valid input "+ value);
+        } else {
+            alert("valid input"+ value);
+        }
+ }
+
+ function addRow(){
+
+ 	let table = document.getElementById("data_table");
+ 	let tableLen=table.rows.length-1;
+    //alert(tableLen);
+    let name=document.getElementById("new_name").value;
+    let gender=document.getElementById("new_gender").value;
+    let age = document.getElementById("new_age").value;
+
+
+
+
+ 	let tradd= `<tr id="row_${tableLen}">
+								<td id="name_col_${tableLen}">${name}</td>
+								<td id="gender_col_${tableLen}">${gender}"</td>
+								<td id="age_col_${tableLen}">${age}</td>
+								<td>
+								<input id="save_btn_${tableLen}" type="button" class="add" onclick="saveRow(${tableLen});" value="Save Row">
+                                 <input id="edit_btn_${tableLen}" type="button" class="add" onclick="editRow(${tableLen});" value="Edit Row">
+                                 <input id="delete_btn_${tableLen}" type="button" class="add" onclick="deleteRow(${tableLen});" value="Delete Row">
+								</td>
+							</tr>`;
+
+	table.insertRow(tableLen).outerHTML=tradd;
+	document.getElementById("new_name").value="";
+	document.getElementById("new_gender").value="";
+	document.getElementById("new_age").value="";
+	document.getElementById("save_btn_"+tableLen).style.display="none";
+	//document.getElementById("edit_btn_"+tableLen).style.display="block";
+
+ }
+
+ function deleteRow(elem){
+ 	document.getElementById("row_"+elem).outerHTML="";
+
+ }
+
+ function editRow(elem){
+ 	document.getElementById("save_btn_"+elem).style.display="inline-block";
+ 	document.getElementById("edit_btn_"+elem).style.display="none"
+ 	let name = document.getElementById("name_col_"+elem);
+ 	let gender=document.getElementById("gender_col_"+elem);
+ 	let age = document.getElementById("age_col_"+elem);
+ 	let name_val=name.innerHTML;
+ 	let gender_val=gender.innerHTML;
+ 	let age_val=age.innerHTML;
+ 	name.innerHTML=`<td><input type="text" id="name_text_${elem}" class="field-style" value="${name_val}"></td>`;
+	age.innerHTML =`<td><input type="text" id="age_text_${elem}" class="field-style" value="${age_val}"></td>`;
+	gender.innerHTML=`<td><input type="text" id="gender_text_${elem}" class="field-style" value=${gender_val}></td>`;
+
+
+ }
+
+ function saveRow(elem){
+ 	let name = document.getElementById("name_text_"+elem).value;
+ 	let gender=document.getElementById("gender_text_"+elem).value;
+ 	let age = document.getElementById("age_text_"+elem).value;
+    document.getElementById("name_col_"+elem).innerHTML=name;
+    document.getElementById("gender_col_"+elem).innerHTML=gender;
+    document.getElementById("age_col_"+elem).innerHTML=age;
+    document.getElementById("save_btn_"+elem).style.display="none";
+ 	document.getElementById("edit_btn_"+elem).style.display="inline-block"
+
+ }
