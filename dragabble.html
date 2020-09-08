@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="main.css"> 
+    </head>
+    <body>
+        <div class="app">
+            <header>
+                <h1>Drag and Drop</h1>
+            </header>
+            <div class="lists">
+                <div class="list">
+                    <div class="list-item"  draggable="true">list-item1</div>
+                    <div class="list-item"  draggable="true">list-item2</div>
+                    <div class="list-item"  draggable="true">list-item3</div>
+                </div>
+                <div class="list">
+                    
+                </div>
+                <div class="list">
+                   
+                </div>
+
+            </div>
+        </div>
+        <style>
+            *{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #FFCE00;
+    font-family:'Roboto',Arial, Helvetica, sans-serif;
+}
+
+.app{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-flow: column;
+}
+
+header{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    height: 60px;
+}
+.lists{
+    display: flex;
+    flex:1;
+    width: 100%;
+    overflow-x:scroll;
+}
+
+.lists>.list{
+    display: flex;
+    flex-flow: column;
+    flex:1;
+    width:100%;
+    min-width: 250px;
+    max-width: 350px;
+    min-height: 150px;
+    background-color: rgba(0,0, 0, 0.1);
+    margin:0 15px;
+    padding:8px;
+    transition: all 0.2 linear;
+}
+.lists>.list>.list-item{
+background-color: #f3f3f3;
+border-radius: 8px;
+padding: 15px 20px;
+text-align: center;
+margin:4px 0;
+}
+        </style>
+        <script src="main.js"></script>
+        
+    </body>
+</html>
