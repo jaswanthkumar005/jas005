@@ -1,0 +1,86 @@
+<!doctype html>				  
+<html lang="en">           
+<head>
+
+<title>HTML5 Page</title>
+<meta charset="utf-8">     
+  
+<style>
+    body{
+        margin: 0 auto;
+        max-width: 1140px;
+    }
+   .home_header_buttons {
+  display: flex;
+  width:100%;
+  align-items: center;
+  position: relative;
+  border:solid 1px rgba(0, 0, 0,0.5);
+  background-color: rgba(0, 0, 0,0.5);
+  height:60px;
+}
+
+.home_header_buttons .btn_home {
+   
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  padding: 20px 40px;
+  color: #fff;
+  border-right: none;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border:solid 1px rgba(0, 0, 0,0.5);
+}
+
+
+.active {
+ background-color: orange;
+}
+a{text-decoration:none;}
+#test1{
+    position: absolute; 
+    left: 0;
+    border-right:0;
+    
+}
+
+#test2{
+    position: absolute;
+    left: 117px;
+    border-right:0;
+   
+}
+#test3{
+    position: absolute;   
+    border-right:0;
+    left: 222px;
+}
+#test4{
+    position: absolute;
+    border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+    left: 339px;
+    
+    
+}
+
+
+
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="home_header_buttons">
+            <a href="#" id="test1" class="btn_home ">Regions</a>
+            <a href="#" id="test2" class="btn_home" >North</a>
+            <a href="#" id="test3" class="btn_home " >Vellore</a>
+            <a href="#" id="test4" class="btn_home active" >karthikapuram</a>
+            
+          </div>
+    </div>
+    
+</body>
+
+</html>
