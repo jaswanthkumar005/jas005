@@ -1,0 +1,147 @@
+<!doctype html>				  
+<html lang="en">           
+<head>
+
+<title>HTML5 Page</title>
+<meta charset="utf-8">     
+  
+<style>
+    body{
+        margin: 0 auto;
+        max-width: 1140px;
+    }
+   .home_header_buttons {
+  display: flex;
+  width:100%;
+  align-items: center;
+  position: relative;
+  border:solid 1px rgba(0, 0, 0,0.5);
+  background-color: rgba(0, 0, 0,0.5);
+  height:60px;
+}
+
+.home_header_buttons .btn_home {
+   
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  padding: 20px 40px;
+  color: #fff;
+  border-right: none;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border:solid 1px rgba(0, 0, 0,0.5);
+}
+
+
+.active {
+ background-color: orange;
+}
+a{text-decoration:none;}
+#test1{
+    position: absolute; 
+    left: 0;
+    border-right:0;
+    
+}
+
+#test2{
+    position: absolute;
+    left: 117px;
+    border-right:0;
+   
+}
+#test3{
+    position: absolute;   
+    border-right:0;
+    left: 222px;
+}
+#test4{
+    position: absolute;
+    border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+    left: 339px;
+    
+    
+}
+
+
+.overlay{
+    transform:translateX(-20%)
+}
+</style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="home_header_buttons">
+            <a href="#" id="test1" class="btn_home ">Regions</a>
+            <a href="#" id="test2" class="btn_home" >North</a>
+            <a href="#" id="test3" class="btn_home " >Vellore</a>
+            <a href="#" id="test4" class="btn_home active" >karthikapuram</a>
+            
+          </div>
+    </div>
+
+    <div>
+        <input type="text" id="inputVal" value="">
+        <button type="button" onclick="myFunc()">submit</button>
+        <p id="get_val"></p>
+    </div>
+
+    <script>
+        function myFunc(){
+            clearInterval();
+            var  time = document.getElementById("inputVal").value;
+           console.log(time);
+           timeSlipt = time.split(":");
+           var hr = parseInt(timeSlipt[0]) * 60 * 60;
+           var min = parseInt(timeSlipt[1])*60;
+           var seconds = hr + min;
+           console.log(hr+min);
+
+           setInterval(function(){
+              
+               if(seconds >= 0){
+                   
+                countDown(seconds);
+                 seconds--;
+               } else {
+                   clearInterval();
+               }
+            
+           },300);
+        }
+
+        function countDown(seconds){
+            let hours = Math.floor(seconds/3600);
+            let remainingMin = seconds % 3600;
+            let min = Math.floor(remainingMin/60);
+            let sec = remainingMin%60;
+            let timer;
+             if(hours.toString().length == 1){
+                hours = "0"+ hours;
+             timer = `${hours}:${min}:${sec}`;
+             } 
+             if(min.toString().length == 1){
+                min = "0"+min;
+             }
+            
+            if(sec.toString().length == 1){
+                sec = "0"+sec;
+            }
+
+            //console.log(`${hours}:${min}:${sec}`);
+            document.getElementById("get_val").innerHTML=`${hours}:${min}:${sec}`;
+        }
+
+        function updateCountDown(){
+
+        }
+    
+      </script>
+    
+</body>
+
+</html>
